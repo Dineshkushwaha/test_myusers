@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ * Adds the myusers and user_access_log table.
+ */
+
+/**
+ * Implements hook_schema()
+ */
+function test_myusers_schema() {
+
+  $schema = __useraccess_schema();
+  $schema['myusers'] = [
+    'description' => 'A table to store users data',
+    'fields' => [
+      'id' => [
+        'description' => 'Holds the id value',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'name' => [
+        'description' => 'Holds the name value',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  return $schema;
+}
+
+/**
+ * UserAccessLog Schema.
+ */
+function __useraccess_schema() {
+
+  $schema['user_access_log'] = [
+    'fields' => [
+      'uid' => [
+        'description' => 'UserId key',
+        'type' => 'int',
+        'not null' => TRUE,
+      ],
+      'ip' => [
+        'description' => 'IP',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => FALSE,
+      ],
+      'type_log' => [
+        'description' => 'Logtype',
+        'type' => 'varchar',
+        'length' => '50',
+        'not null' => FALSE,
+      ],
+      'date' => [
+        'type' => 'int',
+        'not null' => TRUE,
+      ],
+    ],
+  ];
+
+  return $schema;
+}

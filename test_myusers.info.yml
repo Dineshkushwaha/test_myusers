@@ -1,0 +1,10 @@
+name: 'Test myUsers'
+description: 'myUser workflow'
+type: module
+core_version_requirement: ^8.8 || ^9
+dependencies:
+  - drupal:views_data_export
+  - drupal:view_custom_table
+  - drupal:views
+  - drupal:xls_serialization
+  - drupal:csv_serialization

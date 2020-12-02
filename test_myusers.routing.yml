@@ -1,0 +1,14 @@
+test_myusers.form:
+  path: '/user/registration'
+  defaults:
+    _form: '\Drupal\test_myusers\Form\RegistrationForm'
+    _title: 'Registration Form'
+  requirements:
+    _permission: 'access content'
+test_myusers_import.form:
+  path: '/user/import'
+  defaults:
+    _form: '\Drupal\test_myusers\Form\CSVImportForm'
+    _title: 'Import CSV'
+  requirements:
+    _permission: 'access content'
