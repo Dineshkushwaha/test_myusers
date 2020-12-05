@@ -61,26 +61,20 @@ class CSVimportForm extends FormBase {
 
     $file = $form_state->getValue('csvfile');
     $fid = $file[0];
-    $row = 1;
     if ($fid) {
       $file_storage = \Drupal::entityTypeManager()->getStorage('file');
       $file = $file_storage->load($fid);
-
+      $num = 0;
       if (($handle = fopen($file->getFileUri(), "r")) !== FALSE) {
         while (($data = fgetcsv($handle)) !== FALSE) {
-          $num = count($data);
-          $row++;
-          for ($c = 0; $c < $num; $c++) {
-            // exit;.
-            print_r($data[$c]);
-          }
-          $batch['operations'][] = [['\Drupal\test_myusers\Form\CSVimportForm', 'importUsers'], [$row[0]]];
+          $num = $num + 1;
+          $batch['operations'][] = [['\Drupal\test_myusers\Form\CSVimportForm', 'importUsers'], [$data[0]]];
         }
         fclose($handle);
 
         batch_set($batch);
-        \Drupal::messenger()->addMessage('Imported ' . $row . ' Users!');
       }
+      \Drupal::messenger()->addMessage('Imported '. $num .' Users!' );
     }
 
   }
